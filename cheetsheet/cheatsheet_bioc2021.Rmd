@@ -1,0 +1,229 @@
+---
+classoption: landscape
+output:
+  html_document: default
+  pdf_document:
+    template: template.tex
+always_allow_html: yes
+---
+
+```{r, echo = F}
+library(DiagrammeR)
+```
+
+<center><b><font size="8"> `recountmethylation` cheatsheet</font></b></center>
+
+:::: {style="display: flex;"}
+
+::: {.minipage data-latex="{.5\linewidth}"}
+
+---
+
+<center><b> TERMINOLOGY </b></center>
+
+---
+
+<center><b> DNA methylation (DNAm) terms </b></center>
+
+```{r, echo = F}
+mdef <- matrix(c("CpG locus", ":", "Cytosine-guanine dinucleotide pair",
+                 "DNA methylation (DNAm)", ":", "DNA with covalently bound methyl (CH~3~) groups; here specify cytosine-bound methyl groups in a CpG locus.",
+                 "CG Island", ":", "DNA regions enriched for cytosine, guanine, and CpG loci."), ncol = 3, byrow = T)
+knitr::kable(mdef)
+```
+
+<center><b> BeadArray terms </b></center>
+
+```{r, echo = F}
+mdef <- matrix(c("CpG probe", ":", "Class of DNAm array technology using bead-bounded probes to quantify DNAm at specific CpG loci.",
+                 "BeadArray", ":", "Type of microarray using BeadArray probes, manufactured by Illumina, to quantify DNAm.",
+                 "HM27k", ":", "Type of DNAm array, introduced around 2005, targeted roughly 27,000 CpG loci in humans.",
+                 "HM450k", ":", "Type of DNAm array, introduced around 2011, targeting roughly 450,000 CpG loci in humans.",
+                 "EPIC", ":", "Type of DNAm array, introduced around 2015, targeting roughly 855,000 CpG loci in humans. Shares 93% (about 453,000) of probes with the HM450k platform."), ncol = 3, byrow = T)
+knitr::kable(mdef)
+```
+
+<center><b> Data object classes </b></center>
+
+```{r, echo = F}
+mdef <- matrix(c("`HDF5`/`h5`", ":", "Hierarchial database format 5, a type of database syntax implementing compression and chunking.",
+                 "`se`", ":", "Short for `SummarizedExperiment`, a multifaceted object class in R/Bioconductor containing slots for assay measurements and metadata for the platform, samples, and experiment.",
+                 "`h5se`", ":", "Short for `HDF5-SummarizedExperiment`, a hybrid object class that uses `DelayedArray` for caching.",
+                 "`RGChannelSet`/`rg`", ":", "Type of `se` object containing dual color channel data for red and green channels on Illumina's BeadArray DNAm array platforms.",
+                 "`GenomicMethylSet`/`gm`", ":", "Type of `se` object containing the methylated (a.k.a. 'M') and unmethylated (a.k.a. 'U') signals calculated from dual channel intensity data.",
+                 "`GenomicRadioSet`/`gr`", ":", "Type of `se` object containing the DNAm fractions (a.k.a. Beta-values) and/or logit2-transformed fractions (a.k.a. M-values) calculated from the M and U fractions."), ncol = 3, byrow = T)
+knitr::kable(mdef)
+```
+
+:::
+
+::: {.minipage data-latex="{.5\linewidth}"}
+
+---
+
+<center><b> Download DNAm compilations </center></b>
+
+---
+
+The following command line options show how to download database files from the server (http://www.recount.bio/data), or you may try to `right-click -> download` from within your browser. Note, it may help to increase your timeout period for long downloads.
+
+* Use `recountmethylation`: e.g. `getdb_h5se_rg("hm450k")` to download the HM450k `RGChannelSet` data as an `HDF5-SummarizedExperiment` object (see `?getdb` for more info).
+
+* Use `wget`: From command line, enter `wget -r <filepath>`, replacing `<filepath>` with an address from `https://www.recount.bio/data`. Note the `-r` is needed for `h5se` objects, which are directories.
+
+---
+
+<center><b> `DelayedArray` operations and pipes </center></b>
+
+---
+
+The following operations make use of `DelayedArray` caching.
+
+* Perform summary operations with `dim()`/`nrow()`/`ncol()`
+
+* Rapidly update the sample metadata in an `h5se` object with `quickResaveHDF5SummarizedExperiment()`.
+
+* Automatically pipe data chunks between `DelayedArray` objects, e.g.
+
+```{r, eval = F}
+library(HDF5Array)
+h5 <- loadHDF5SummarizedExperiment(h5se.path)
+bval <- getBeta(h5) # this is delayed
+saveHDF5Array(bval, file = "db.h5") # executes with chunking
+```
+
+---
+
+<center><b> RECAST DATASET OBJECTS </center></b>
+
+---
+
+If operations on datasets throw errors due to their class, you may attempt to recast and rerun them without the `DelayedArray` backend.
+
+<center><b> Recast an `RGChannelSet` </center></b>
+
+```{r, eval = F}
+library(minfi)
+rg <- loadHDF5SummarizedExperiment(rg.path)
+green.matrix <- as.matrix(getGreen(rg))
+red.matrix <- as.matrix(getRed(rg))
+anno <- annotation(rg)
+metadata <- DataFrame(pData(rg))
+rg.new <- RGChannelSet(Green = green.matrix, 
+                          Red = red.matrix, 
+                          annotation = anno,
+                          colData = metadata)
+```
+
+<center><b> Recast a `GenomicRatioSet` </center></b>
+
+```{r, eval = F}
+library(minfi)
+gr <- loadHDF5SummarizedExperiment(gr.path)
+bval.matrix <- as.matrix(getBeta(gr))
+anno <- annotation(gr)
+metadata <- DataFrame(pData(gr))
+ranges <- granges(gr)
+gr.new <- GenomicRatioSet(gr = ranges, 
+                          Beta = bval.matrix, 
+                          annotation = anno,
+                          colData = metadata)
+```
+
+---
+---
+
+:::
+
+::::
+
+:::: {style="display: flex;"}
+
+:::: {.blackbox data-latex=""}
+
+---
+
+<center><b> DECISION TREE </b></center>
+
+---
+
+Once you've selected a DNAm array platform (e.g. HM450k or EPIC), you can use the following decision tree to determine which database compilation object type to download.
+
+:::
+
+::: {}
+
+```{r, echo = F, fig.width = 6}
+dt.img <- grViz(diagram = "digraph flowchart {
+      # define node aesthetics
+      node [fontname = Arial, shape = oval, color = Lavender, style = filled]        
+      tab1 [label = '@@1']
+      tab2 [label = '@@2']
+      tab3 [label = '@@3']
+      tab4 [label = '@@4']
+      tab5 [label = '@@5']
+      tab6 [label = '@@6']
+      tab7 [label = '@@7']
+      tab8 [label = '@@8']
+      tab9 [label = '@@9']
+      tab10 [label = '@@10']
+      tab11 [label = '@@11']
+      tab12 [label = '@@12']
+      tab13 [label = '@@13']
+      tab14 [label = '@@14']
+      tab15 [label = '@@15']
+      tab16 [label = '@@16']
+      tab17 [label = '@@17']
+      tab18 [label = '@@18']
+      # set up node layout
+      tab1 -> tab2;
+      tab1 -> tab3;
+      tab2 -> tab4;
+      tab2 -> tab5;
+      tab3 -> tab6;
+      tab4 -> tab7;
+      tab4 -> tab8;
+      tab5 -> tab9;
+      tab5 -> tab10;
+      tab6 -> tab11;
+      tab6 -> tab12;
+      tab7 -> tab13;
+      tab8 -> tab14;
+      tab9 -> tab15;
+      tab10 -> tab16;
+      tab11 -> tab17;
+      tab12 -> tab18
+      }
+      [1]: 'Data format'
+      [2]: 'Raw'
+      [3]: 'Normalized'
+      [4]: 'Color signals'
+      [5]: 'U/M signals'
+      [6]: 'DNAm ratios'
+      [7]: 'R'
+      [8]: 'Python'
+      [9]: 'R'
+      [10]: 'Python'
+      [11]: 'R'
+      [12]: 'Python'
+      [13]: 'h5se rg'
+      [14]: 'h5 rg'
+      [15]: 'h5se gm'
+      [16]: 'h5 gm'
+      [17]: 'h5se gr'
+      [18]: 'h5 gr'
+      ")
+dt.img
+```
+
+:::
+
+::: {}
+
+<div style= "float:center;position: relative">
+![](remeth_hexsticker.png){width=1000%}
+</div>
+
+:::
+
+::::
