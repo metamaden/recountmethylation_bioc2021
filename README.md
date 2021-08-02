@@ -22,6 +22,6 @@ Welcome to the repo for the Bioc2021 workshop on `recountmethylation`! Here, you
 
 * [Presentation code](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/workshop_code) -- Scripts to reproduce the workshop presentation code examples.
 
-* [Presentation slides]()
+* [Presentation slides]() -- Slides from the Bioc2021 workshop presentation.
 
 <p style="text-align:center;"><img src="https://github.com/metamaden/recountmethylation_bioc2021/blob/main/images/bioc2021-recountmethylation-hexstickers.jpg" alt="recountmethylation hexsticker" class="center" width="200"/></p>
