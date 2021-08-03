@@ -2,6 +2,8 @@
 
 Welcome to the repo for the Bioc2021 software demo/workshop on `recountmethylation`! Here, you can find key learning resources, including the presentation slides and code, a `recountmethylation` cheatsheet, and a helpful wiki that links to tutorials, Illumina's platform documentation, and key related Bioconductor libraries.
 
+<p style="text-align:center;"><img src="https://github.com/metamaden/recountmethylation_bioc2021/blob/main/images/bioc2021-recountmethylation-hexstickers.jpg" alt="recountmethylation hexsticker" class="center" width="200"/></p>
+
 # Learning resources provided in this repo
 
 * [Workshop recording]()(This will link to the pre-recorded lecture video once it's uploaded!)
@@ -47,5 +49,3 @@ The code break sections of this demo cover fundamental topics to aid an understa
 * How do I summarize available samples by study, for a given subset of filtered samples?
 * How would I access GEO in a browser, concurrent with an R session, to better understand my filtered samples?
 * What information should I include as I'm annotating studies represented among filtered samples?
-
-<p style="text-align:center;"><img src="https://github.com/metamaden/recountmethylation_bioc2021/blob/main/images/bioc2021-recountmethylation-hexstickers.jpg" alt="recountmethylation hexsticker" class="center" width="200"/></p>
