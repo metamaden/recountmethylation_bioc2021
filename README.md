@@ -12,6 +12,8 @@ Welcome to the repo for the Bioc2021 software demo/workshop on `recountmethylati
 
 # Details about the invited software demo/workshop
 
+The demo will happen at 7pm PT, August 4th, 2021. You may follow along by referring to the provided slides and scripts. This page will also link to the pre-recorded lecture video, once it's uploaded to YouTube.
+
 ## Remote session info
 
 * Author/presenter: Sean K. Maden (maden@ohsu.edu)
@@ -19,8 +21,6 @@ Welcome to the repo for the Bioc2021 software demo/workshop on `recountmethylati
 * Title: *Accessing, querying, and analyzing public DNAm array data compilations with recountmethylation*
 * Date: August 4th, 2021
 * Conference link: [https://bioc2021.bioconductor.org/posts/paper106/](https://bioc2021.bioconductor.org/posts/paper106/)
-
-This page will also link to the pre-recorded lecture video, once it's uploaded to YouTube. When watching this lecture, you can follow along during the Code Break sections by referring to the corresponding scripts deposited [here](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/workshop_materials). 
 
 ## Code break scripts and questions covered
 
