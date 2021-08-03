@@ -24,6 +24,6 @@ Welcome to the repo for the Bioc2021 workshop on `recountmethylation`! Here, you
 
 * [Wiki](https://github.com/metamaden/recountmethylation_bioc2021/wiki) -- Links to platform documentation, Bioconductor dependencies, and tutorials with crucial background.
 
-* [Cheatsheet](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/cheetsheet) -- Overview of terms, code, and a decision tree to aid with using `recountmethylation`.
+* [Cheatsheet](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/cheatsheet) -- Overview of terms, code, and a decision tree to aid with using `recountmethylation`.
 
 <p style="text-align:center;"><img src="https://github.com/metamaden/recountmethylation_bioc2021/blob/main/images/bioc2021-recountmethylation-hexstickers.jpg" alt="recountmethylation hexsticker" class="center" width="200"/></p>
