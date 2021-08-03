@@ -14,7 +14,7 @@ Conference link: [https://bioc2021.bioconductor.org/posts/paper106/](https://bio
 
 Welcome to the repo for the Bioc2021 workshop on `recountmethylation`! Here, you can find key learning resources, including the presentation slides and code, a `recountmethylation` cheatsheet, and a helpful wiki that links to tutorials, Illumina's platform documentation, and key related Bioconductor libraries.
 
-# Lecture for the demo/workshop
+# Software demo/workshop and scripts
 
 This page will also link to the pre-recorded lecture video, once it's uploaded to YouTube. When watching this lecture, you can follow along during the Code Break sections by referring to the corresponding scripts deposited [here](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/workshop_materials). 
 
