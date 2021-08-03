@@ -49,3 +49,9 @@ The code break sections of this demo cover fundamental topics to aid an understa
 * How do I summarize available samples by study, for a given subset of filtered samples?
 * How would I access GEO in a browser, concurrent with an R session, to better understand my filtered samples?
 * What information should I include as I'm annotating studies represented among filtered samples?
+
+# Manuscript citation
+
+If you use `recountmethylation` in published work, please cite the following paper:
+
+Sean K. Maden, Reid F. Thompson, Kasper D. Hansen, Abhinav Nellore. 'Human methylome variation across Infinium 450K data on the Gene Expression Omnibus.' 2020. bioRxiv 2020.11.17.387548; doi: https://doi.org/10.1101/2020.11.17.387548
