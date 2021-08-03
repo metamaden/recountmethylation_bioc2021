@@ -18,9 +18,9 @@ Welcome to the repo for the Bioc2021 workshop on `recountmethylation`! Here, you
 
 * [Workshop recording]()(This will link to the pre-recorded lecture video once it's uploaded!)
 
-* [Presentation slides]() -- Slides from the Bioc2021 workshop presentation.
+* [Presentation slides](https://github.com/metamaden/recountmethylation_bioc2021/blob/main/workshop_materials/bioc2021_deck.pptx) -- Slides from the Bioc2021 workshop presentation.
 
-* [Presentation code](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/workshop_code) -- Scripts to reproduce the workshop presentation code examples. You can follow along with these scripts during the code break sections of the presentation.
+* [Presentation code](https://github.com/metamaden/recountmethylation_bioc2021/tree/main/workshop_materials) -- Scripts to reproduce the workshop presentation code examples. You can follow along with these scripts during the code break sections of the presentation.
 
 * [Wiki](https://github.com/metamaden/recountmethylation_bioc2021/wiki) -- Links to platform documentation, Bioconductor dependencies, and tutorials with crucial background.
 
