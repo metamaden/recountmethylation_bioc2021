@@ -20,21 +20,22 @@ This page will also link to the pre-recorded lecture video, once it's uploaded t
 
 This lecture covers a number of topics which I find important for understanding and working with the database compilation files, including:
 
-**Code Break #1**
+**Code Break #1 topics**
 * What is the `SummarizedExperiment` container/class?
 * What are the classes of `SummarizedExperiment` objects used to analyze DNAm array data?
 * How do I inspect properties of `SummarizedExperiment` objects?
 * How do I convert `RGChannelSet` objects between DNAm array platforms (e.g. from EPIC to HM450K)?
 * How do I combine `RGChannelSet` objects between different platforms?
 
-**Code Break #2***
+**Code Break #2 topics**
+* How do I download database files from the server ([/recount.bio/data](https://recount.bio/data/)) using the `getdb()` functions?
 * How do I convert from `SummarizedExperiment` to `h5se`/`HDF5-SummarizedExperiment`?
 * How do I save and load an `h5se` dataset?
 * What are the contents of an `h5se` directory, and what's error when this fails to load?
 * How do I rapidly update the sample metadata, or `colData`, for an `h5se` dataset, without overwriting all the assays data?
 * When do I need to recast an `h5se` object as a basic, non-`DelayedArray` backed, `SummarizedExperiment`?
 
-**Code Break #3***
+**Code Break #3 topics**
 * How do I summarize the learned labels for the tissue and disease variables in the sample metadata?
 * How do I query the tissue variable for a specific label, using regular expressions?
 * How do I summarize available samples by study, for a given subset of filtered samples?
