@@ -37,7 +37,7 @@ The code break sections of this demo cover fundamental topics to aid an understa
 * How do I download database files from the server ([/recount.bio/data](https://recount.bio/data/)) using the `getdb()` functions?
 * How do I convert from `SummarizedExperiment` to `h5se`/`HDF5-SummarizedExperiment`?
 * How do I save and load an `h5se` dataset?
-* What are the contents of an `h5se` directory, and what's error when this fails to load?
+* What are the contents of an `h5se` directory, and what error occurs when this fails to load?
 * How do I rapidly update the sample metadata, or `colData`, for an `h5se` dataset, without overwriting all the assays data?
 * When do I need to recast an `h5se` object as a basic, non-`DelayedArray` backed, `SummarizedExperiment`?
 
