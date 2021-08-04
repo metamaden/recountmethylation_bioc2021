@@ -2,8 +2,7 @@
 classoption: landscape
 output:
   html_document: default
-  pdf_document:
-    template: template.tex
+  pdf_document: default
 always_allow_html: yes
 ---
 
@@ -11,7 +10,7 @@ always_allow_html: yes
 library(DiagrammeR)
 ```
 
-<center><b><font size="8"> `recountmethylation` cheatsheet</font></b></center>
+<center><b><font size="8"> Cheat sheet for recountmethylation</font></b></center>
 
 :::: {style="display: flex;"}
 
@@ -28,7 +27,7 @@ library(DiagrammeR)
 ```{r, echo = F}
 mdef <- matrix(c("CpG locus", ":", "Cytosine-guanine dinucleotide pair",
                  "DNA methylation (DNAm)", ":", "DNA with covalently bound methyl (CH~3~) groups; here specify cytosine-bound methyl groups in a CpG locus.",
-                 "CG Island", ":", "DNA regions enriched for cytosine, guanine, and CpG loci."), ncol = 3, byrow = T)
+                 "CpG Island", ":", "DNA regions enriched for cytosine, guanine, and CpG loci."), ncol = 3, byrow = T)
 knitr::kable(mdef)
 ```
 
@@ -38,8 +37,8 @@ knitr::kable(mdef)
 mdef <- matrix(c("CpG probe", ":", "Class of DNAm array technology using bead-bounded probes to quantify DNAm at specific CpG loci.",
                  "BeadArray", ":", "Type of microarray using BeadArray probes, manufactured by Illumina, to quantify DNAm.",
                  "HM27k", ":", "Type of DNAm array, introduced around 2005, targeted roughly 27,000 CpG loci in humans.",
-                 "HM450k", ":", "Type of DNAm array, introduced around 2011, targeting roughly 450,000 CpG loci in humans.",
-                 "EPIC", ":", "Type of DNAm array, introduced around 2015, targeting roughly 855,000 CpG loci in humans. Shares 93% (about 453,000) of probes with the HM450k platform."), ncol = 3, byrow = T)
+                 "HM450k", ":", "Type of DNAm array, introduced around 2011, targeting roughly 450,000 CpG loci in humans. Probes primarily cover gene and CpG island regions.",
+                 "EPIC", ":", "Type of DNAm array, introduced around 2015, targeting roughly 855,000 CpG loci in humans. Shares 93% (about 453,000) of probes with the HM450k platform. Probes primarily cover genes, CpG islands, and intergenic regulatory features."), ncol = 3, byrow = T)
 knitr::kable(mdef)
 ```
 
@@ -50,8 +49,8 @@ mdef <- matrix(c("`HDF5`/`h5`", ":", "Hierarchial database format 5, a type of d
                  "`se`", ":", "Short for `SummarizedExperiment`, a multifaceted object class in R/Bioconductor containing slots for assay measurements and metadata for the platform, samples, and experiment.",
                  "`h5se`", ":", "Short for `HDF5-SummarizedExperiment`, a hybrid object class that uses `DelayedArray` for caching.",
                  "`RGChannelSet`/`rg`", ":", "Type of `se` object containing dual color channel data for red and green channels on Illumina's BeadArray DNAm array platforms.",
-                 "`GenomicMethylSet`/`gm`", ":", "Type of `se` object containing the methylated (a.k.a. 'M') and unmethylated (a.k.a. 'U') signals calculated from dual channel intensity data.",
-                 "`GenomicRadioSet`/`gr`", ":", "Type of `se` object containing the DNAm fractions (a.k.a. Beta-values) and/or logit2-transformed fractions (a.k.a. M-values) calculated from the M and U fractions."), ncol = 3, byrow = T)
+                 "`GenomicMethylSet`/`gm`", ":", "Type of `se` object containing the methylated (a.k.a. 'M') and unmethylated (a.k.a. 'U') signals calculated from red and green dual channel intensity data.",
+                 "`GenomicRadioSet`/`gr`", ":", "Type of `se` object containing the DNAm fractions (a.k.a. Beta-values) and/or logit2-transformed fractions (a.k.a. M-values) calculated from the M and U signals."), ncol = 3, byrow = T)
 knitr::kable(mdef)
 ```
 
@@ -77,20 +76,13 @@ The following command line options show how to download database files from the 
 
 ---
 
-The following operations make use of `DelayedArray` caching.
+The following operations make use of `DelayedArray` backend for efficient memory usage, delayed large operations, and automatic large file management.
 
 * Perform summary operations with `dim()`/`nrow()`/`ncol()`
 
 * Rapidly update the sample metadata in an `h5se` object with `quickResaveHDF5SummarizedExperiment()`.
 
-* Automatically pipe data chunks between `DelayedArray` objects, e.g.
-
-```{r, eval = F}
-library(HDF5Array)
-h5 <- loadHDF5SummarizedExperiment(h5se.path)
-bval <- getBeta(h5) # this is delayed
-saveHDF5Array(bval, file = "db.h5") # executes with chunking
-```
+* Automatically process data in blocks using functions like `colSums()`, `colMeans()`, `colVars`, `rowSums`, `rowMeans`, and `rowVars()`, etc.
 
 ---
 
@@ -139,7 +131,7 @@ gr.new <- GenomicRatioSet(gr = ranges,
 
 :::: {style="display: flex;"}
 
-:::: {.blackbox data-latex=""}
+:::  {.minipage data-latex="{.5\linewidth}"}
 
 ---
 
@@ -151,7 +143,7 @@ Once you've selected a DNAm array platform (e.g. HM450k or EPIC), you can use th
 
 :::
 
-::: {}
+:::  {.minipage data-latex="{.5\linewidth}"}
 
 ```{r, echo = F, fig.width = 6}
 dt.img <- grViz(diagram = "digraph flowchart {
@@ -218,10 +210,10 @@ dt.img
 
 :::
 
-::: {}
+:::  {.minipage data-latex="{.5\linewidth}"}
 
 <div style= "float:center;position: relative">
-![](remeth_hexsticker.png){width=1000%}
+![](remeth_hexsticker.jpg){width=500%}
 </div>
 
 :::
